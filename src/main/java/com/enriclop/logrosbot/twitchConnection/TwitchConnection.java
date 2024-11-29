@@ -401,7 +401,7 @@ public class TwitchConnection {
 
     public Achievement spawnPhoto() {
         log.info("Spawning photo");
-        Achievement newAchievement = achievementGeneration.generateSteamRandomAchievement();
+        Achievement newAchievement = achievementGeneration.generateRandomAchievement();
 
         if (newAchievement != null) {
             wildAchievement = newAchievement;
@@ -481,9 +481,9 @@ public class TwitchConnection {
 
         double catchDifficulty = wildAchievement.getRarity();
 
-        System.out.println(random  + " / " + catchDifficulty);
-
         boolean caught = random < catchDifficulty;
+
+        log.info("Catch difficulty: " + catchDifficulty + " Random: " + random + " Caught: " + caught);
 
         cardInfoClient.sendCatchPokemon(pokeball.toString(), caught);
 

@@ -24,6 +24,7 @@ public class Settings {
     private String clientId;
     private String steamKey;
     private String steamId;
+    private String xboxKey;
 
     @PostConstruct
     public void initAdminUser() {
