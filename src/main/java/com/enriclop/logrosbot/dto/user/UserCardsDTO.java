@@ -1,6 +1,7 @@
-package com.enriclop.logrosbot.dto;
+package com.enriclop.logrosbot.dto.user;
 
-import com.enriclop.logrosbot.modelo.Badge;
+import com.enriclop.logrosbot.dto.AchievementDTO;
+import com.enriclop.logrosbot.modelo.Aura;
 import com.enriclop.logrosbot.modelo.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,7 @@ public class UserCardsDTO {
 
     private List<AchievementDTO> achievements;
 
-    private List<Badge> badges;
+    private List<Aura> auras;
 
     public UserCardsDTO(User user) {
         this.id = user.getId();
@@ -32,7 +33,7 @@ public class UserCardsDTO {
         this.score = user.getScore();
         this.avatar = user.getAvatar();
         this.achievements = AchievementDTO.fromPhotoCards(user.getAchievements());
-        this.badges = user.getBadges();
+        this.auras = user.getAuras();
     }
 
     public static List<UserCardsDTO> fromUsers(List<User> users) {

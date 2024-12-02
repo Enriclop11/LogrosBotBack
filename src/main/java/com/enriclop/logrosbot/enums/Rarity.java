@@ -1,5 +1,8 @@
 package com.enriclop.logrosbot.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Rarity {
 
     COMMON(1),
@@ -15,7 +18,4 @@ public enum Rarity {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
 }

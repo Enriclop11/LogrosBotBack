@@ -1,4 +1,4 @@
-package com.enriclop.logrosbot.dto;
+package com.enriclop.logrosbot.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;

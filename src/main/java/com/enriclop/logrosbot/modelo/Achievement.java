@@ -1,6 +1,9 @@
 package com.enriclop.logrosbot.modelo;
 
-import com.enriclop.logrosbot.dto.LogroDTO;
+import com.enriclop.logrosbot.dto.steamDTO.SteamAchievementDTO;
+import com.enriclop.logrosbot.dto.steamDTO.SteamListAchievementsDTO;
+import com.enriclop.logrosbot.dto.xboxDTO.XboxAchievementDTO;
+import com.enriclop.logrosbot.dto.xboxDTO.XboxGameDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -40,43 +43,37 @@ public class Achievement {
     }
 
     public Achievement(Achievement achievement) {
+        this.achievementId = achievement.getAchievementId();
         this.name = achievement.getName();
         this.description = achievement.getDescription();
         this.photo = achievement.getPhoto();
         this.rarity = achievement.getRarity();
+        this.gameName = achievement.getGameName();
+        this.gameId = achievement.getGameId();
+        this.platform = achievement.getPlatform();
     }
 
-    public Achievement(LogroDTO logroDTO, String photo) {
-        this.name = logroDTO.getName();
-        this.achievementId = logroDTO.getId();
-        this.description = logroDTO.getDescription();
+    public Achievement(SteamAchievementDTO achievementDTO, SteamListAchievementsDTO gameAchievementDTO, String photo, double rarity) {
+        this.achievementId = achievementDTO.apiname;
+        this.name = achievementDTO.name;
+        this.description = achievementDTO.description;
+        this.gameName = gameAchievementDTO.gameName;
+        this.gameId = gameAchievementDTO.steamID;
+        this.platform = "steam";
         this.photo = photo;
-        this.rarity = logroDTO.getRarity();
+        this.rarity = Math.round(rarity * 100.0) / 100.0;
     }
 
-    public Achievement(String name, String description, String photo, int rarity) {
-        this.name = name;
-        this.description = description;
-        this.photo = photo;
-        this.rarity = rarity;
+    public Achievement(XboxGameDTO gameDTO, XboxAchievementDTO achievementDTO) {
+        this.achievementId = achievementDTO.id;
+        this.name = achievementDTO.name;
+        this.description = achievementDTO.description;
+        this.gameName = gameDTO.name;
+        this.gameId = gameDTO.titleId;
+        this.platform = "xbox";
+        this.photo = achievementDTO.mediaAssets.get(0).url;
+        this.rarity = Math.round(achievementDTO.rarity.currentPercentage * 100.0) / 100.0;
     }
 
-    public Achievement(String name, String description, String photo, int rarity, User user) {
-        this.name = name;
-        this.description = description;
-        this.photo = photo;
-        this.rarity = rarity;
-        this.user = user;
-    }
 
-    @Override
-    public String toString() {
-        return "Logro{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", photo='" + photo + '\'' +
-                ", rarity=" + rarity +
-                '}';
-    }
 }

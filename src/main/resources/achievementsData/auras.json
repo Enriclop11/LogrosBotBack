@@ -1,0 +1,16 @@
+{
+  "auras":
+          [
+            {
+                "id" : "1",
+                "name" : "Minimalista",
+                "description" : "El minimalismo es tu estilo de vida",
+                "image" : "https://www.pngall.com/wp-content/uploads/14/Aura-PNG-Cutout.png",
+                "requirements" : {
+                  "numAchievements" : 10
+                },
+                "rarity" : "1",
+                "price" : 100
+            }
+          ]
+}

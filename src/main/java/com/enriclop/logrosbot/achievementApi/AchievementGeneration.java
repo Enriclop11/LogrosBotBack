@@ -39,23 +39,12 @@ public class AchievementGeneration {
             }
 
             SteamAchievementDTO randomAchievement = gameAchievements.get((int) (Math.random() * gameAchievements.size()));
-            Achievement newAchievement = new Achievement();
-            newAchievement.setName(randomAchievement.name);
-            newAchievement.setDescription(randomAchievement.description);
-            newAchievement.setAchievementId(randomAchievement.apiname);
-            newAchievement.setGameId(gameAchievementDTO.steamID);
-            newAchievement.setGameName(gameAchievementDTO.gameName);
 
             String photo = steamConnection.getAchievementIcon(randomGame.appid, randomAchievement.apiname);
-            newAchievement.setPhoto(photo);
 
             double rarity = steamConnection.getAchievementPercentage(randomGame.appid, randomAchievement.apiname);
-            rarity = Math.round(rarity * 100.0) / 100.0;
-            newAchievement.setRarity(rarity);
 
-            newAchievement.setPlatform("steam");
-
-            return newAchievement;
+            return new Achievement(randomAchievement, gameAchievementDTO, photo, rarity);
         } catch (Exception e) {
             return generateSteamRandomAchievement();
         }
@@ -76,17 +65,8 @@ public class AchievementGeneration {
             }
 
             XboxAchievementDTO randomAchievement = achievements.get((int) (Math.random() * achievements.size()));
-            Achievement newAchievement = new Achievement();
-            newAchievement.setName(randomAchievement.name);
-            newAchievement.setDescription(randomAchievement.description);
-            newAchievement.setAchievementId(randomAchievement.id);
-            newAchievement.setGameId(randomGame.titleId);
-            newAchievement.setGameName(randomGame.name);
-            newAchievement.setPhoto(randomAchievement.mediaAssets.get(0).url);
-            newAchievement.setRarity(randomAchievement.rarity.currentPercentage);
-            newAchievement.setPlatform("xbox");
 
-            return newAchievement;
+            return new Achievement(randomGame, randomAchievement);
         } catch (Exception e) {
             return generateXboxRandomAchievement();
         }

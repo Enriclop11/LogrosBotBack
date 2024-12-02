@@ -1,6 +1,5 @@
 package com.enriclop.logrosbot.modelo;
 
-import com.enriclop.logrosbot.dto.BadgeDTO;
 import com.enriclop.logrosbot.utilities.Utilities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -38,7 +37,7 @@ public class User {
     private List<Achievement> achievements = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Badge> badges = new ArrayList<>();
+    private List<Aura> auras = new ArrayList<>();
 
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "items_id")
@@ -84,10 +83,4 @@ public class User {
             throw new IllegalArgumentException("You can only select up to 3 cards.");
         }
     }
-
-    public void addBadge(BadgeDTO badge) {
-        Badge newBadge = new Badge(badge);
-        this.badges.add(newBadge);
-    }
-
 }

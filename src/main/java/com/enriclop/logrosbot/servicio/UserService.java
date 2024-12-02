@@ -1,6 +1,6 @@
 package com.enriclop.logrosbot.servicio;
 
-import com.enriclop.logrosbot.modelo.Badge;
+import com.enriclop.logrosbot.modelo.Aura;
 import com.enriclop.logrosbot.modelo.User;
 import com.enriclop.logrosbot.repositorio.IUserRepository;
 import com.enriclop.logrosbot.security.JwtUtil;
@@ -58,22 +58,22 @@ public class UserService {
         return getUserByUsername(username);
     }
 
-    public void setBadge(String username, Badge badge) {
+    public void setBadge(String username, Aura aura) {
         User user = getUserByUsername(username);
 
         if (user == null) {
             return;
         }
 
-        List<Badge> badges = user.getBadges();
+        List<Aura> auras = user.getAuras();
 
-        if (badges.contains(badge)) {
+        if (auras.contains(aura)) {
             return;
         }
 
-        badges.add(badge);
+        auras.add(aura);
 
-        user.setBadges(badges);
+        user.setAuras(auras);
 
         saveUser(user);
     }

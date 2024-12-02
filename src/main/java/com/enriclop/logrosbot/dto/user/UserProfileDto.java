@@ -1,6 +1,6 @@
-package com.enriclop.logrosbot.dto;
+package com.enriclop.logrosbot.dto.user;
 
-import com.enriclop.logrosbot.modelo.Badge;
+import com.enriclop.logrosbot.modelo.Aura;
 import com.enriclop.logrosbot.modelo.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +23,7 @@ public class UserProfileDto {
 
     private int achievements;
 
-    private List<Badge> badges;
+    private List<Aura> auras;
 
     UserProfileDto(User user) {
         this.id = user.getId();
@@ -32,7 +32,7 @@ public class UserProfileDto {
         this.score = user.getScore();
         this.avatar = user.getAvatar();
         this.achievements = user.getAchievements().size();
-        this.badges = user.getBadges();
+        this.auras = user.getAuras();
     }
 
     public static UserProfileDto fromUser(User user) {

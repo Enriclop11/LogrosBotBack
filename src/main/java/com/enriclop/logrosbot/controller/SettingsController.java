@@ -1,6 +1,6 @@
 package com.enriclop.logrosbot.controller;
 
-import com.enriclop.logrosbot.dto.AdminUser;
+import com.enriclop.logrosbot.dto.user.AdminUser;
 import com.enriclop.logrosbot.dto.Command;
 import com.enriclop.logrosbot.dto.SettingsDTO;
 import com.enriclop.logrosbot.security.Settings;

@@ -1,6 +1,10 @@
 package com.enriclop.logrosbot.controller;
 
-import com.enriclop.logrosbot.dto.*;
+import com.enriclop.logrosbot.dto.login.LoginRequest;
+import com.enriclop.logrosbot.dto.login.LoginResponse;
+import com.enriclop.logrosbot.dto.user.UserCardsDTO;
+import com.enriclop.logrosbot.dto.user.UserDto;
+import com.enriclop.logrosbot.dto.user.UserProfileDto;
 import com.enriclop.logrosbot.modelo.User;
 import com.enriclop.logrosbot.servicio.UserService;
 import com.enriclop.logrosbot.twitchConnection.TwitchConnection;

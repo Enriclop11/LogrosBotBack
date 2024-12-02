@@ -1,6 +1,6 @@
 package com.enriclop.logrosbot.security;
 
-import com.enriclop.logrosbot.dto.AdminUser;
+import com.enriclop.logrosbot.dto.user.AdminUser;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
