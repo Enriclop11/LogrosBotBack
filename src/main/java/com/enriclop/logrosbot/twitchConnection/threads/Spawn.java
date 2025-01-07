@@ -68,7 +68,7 @@ class Timer extends Thread {
             e.printStackTrace();
         }
         if (spawn.wildCard == spawn.conn.getWildAchievement() && spawn.active) {
-            spawn.conn.sendMessage("La foto de " + wildCard.getName() + " ha volado con el aire.");
+            spawn.conn.sendMessage("El logro " + wildCard.getName() + " ha volado con el aire.");
             spawn.conn.setWildAchievement(null);
         }
     }

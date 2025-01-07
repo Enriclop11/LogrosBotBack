@@ -1,7 +1,7 @@
 body {
     font-family: 'Arial', sans-serif;
     text-align: center;
-    background: linear-gradient(to right, #FFD1DC, #9370DB); /* Softer background colors */
+    background: white;
     color: #fff;
     display: flex;
     flex-direction: column;

@@ -41,7 +41,7 @@ public class LogrosBotApplication {
 		//https get to /
 		HttpURLConnection connection = null;
 		try {
-			connection = (HttpURLConnection) new URL("https://kpopcardbot.onrender.com/").openConnection();
+			connection = (HttpURLConnection) new URL("https://duckivements.onrender.com/").openConnection();
 			connection.setRequestMethod("GET");
 			connection.getResponseCode();
 		} catch (Exception e) {

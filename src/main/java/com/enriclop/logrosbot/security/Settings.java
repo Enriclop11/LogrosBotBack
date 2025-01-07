@@ -4,9 +4,11 @@ import com.enriclop.logrosbot.dto.user.AdminUser;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+@Slf4j
 @Configuration
 @Getter
 @Setter
@@ -29,6 +31,8 @@ public class Settings {
     @PostConstruct
     public void initAdminUser() {
         this.adminUser = new AdminUser(adminUsername, adminPassword);
+
+        log.info("Admin user: " + adminUsername + " Password: " + adminPassword);
     }
 
     public String getoAuthTokenChannel() {

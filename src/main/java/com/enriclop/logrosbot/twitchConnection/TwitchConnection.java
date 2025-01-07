@@ -89,26 +89,26 @@ public class TwitchConnection {
     public TwitchConnection() {
         commands = List.of(
                 new Command("leaderboard", true),
-                new Command("spawn", true),
-                new Command("catch", true),
-                new Command("combat", true),
-                new Command("myphotos", true),
-                new Command("refreshusername", false),
+                new Command("spawn", false),
+                new Command("catch", false),
+                new Command("combat", false),
+                new Command("logros", true),
+                new Command("refreshusername", true),
                 new Command("buy", false),
                 new Command("items", false),
-                new Command("points", true),
+                new Command("points", false),
                 new Command("help", true),
                 new Command("lookprices", false),
                 new Command("linkdiscord", false),
                 new Command("watchtime", true),
-                new Command("select", true),
-                new Command("trade", true),
-                new Command("gift", true),
-                new Command("password", true)
+                new Command("select", false),
+                new Command("trade", false),
+                new Command("gift", false),
+                new Command("password", false)
         );
 
         rewards = List.of(
-                new Command("catch", true),
+                new Command("capturar logro", true),
                 new Command("superball", true),
                 new Command("ultraball", true),
                 new Command("masterball", true),
@@ -208,7 +208,7 @@ public class TwitchConnection {
             case "leaderboard" -> leaderboard();
             case "spawn" -> spawnPhoto();
             case "catch" -> trowPokeball(event);
-            case "myphotos" -> lookAlbum(event);
+            case "logros" -> lookAlbum(event);
             case "refreshusername" -> refreshUsername(event.getUser());
             //case "buy" -> buyItem(event);
             //case "items" -> lookItems(event);
@@ -238,7 +238,7 @@ public class TwitchConnection {
         if (!command.isActive()) return;
 
         switch (command.getName()) {
-            case "catch" -> {
+            case "capturar logro" -> {
                 System.out.println("catching");
                 catchPokemon(event.getRedemption().getUser().getId(), POKEBALL);
             }
@@ -519,7 +519,7 @@ public class TwitchConnection {
 
     public void lookAlbum(ChannelMessageEvent event){
         start(event.getUser().getId());
-        sendMessage("Tus photocards: " + settings.getDomain() + "/photocards/" + event.getUser().getName().toLowerCase());
+        sendMessage("Tus logros: " + settings.getDomain() + "/user/" + event.getUser().getName().toLowerCase());
     }
 
     public void lookPrices (ChannelMessageEvent event){
