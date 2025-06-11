@@ -73,10 +73,6 @@ public class AchievementGeneration {
     }
 
     public Achievement generateRandomAchievement() {
-        if (Math.random() < 0.5) {
-            return generateSteamRandomAchievement();
-        } else {
-            return generateXboxRandomAchievement();
-        }
+        return generateSteamRandomAchievement();
     }
 }

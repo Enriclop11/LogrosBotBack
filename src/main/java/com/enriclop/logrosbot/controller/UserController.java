@@ -62,6 +62,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("/streamUsers")
+    public List<String> getStreamUsers() {
+        return twitchConnection.getSetWatchTime().usersInThisStream.stream().map(User::getUsername).toList();
+    }
+
     @PostMapping("/token")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         try {

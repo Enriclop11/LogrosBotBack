@@ -4,6 +4,7 @@ import com.enriclop.logrosbot.modelo.User;
 import com.enriclop.logrosbot.modelo.WatchTime;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -15,6 +16,10 @@ public class SetWatchTime extends Thread {
 
     private List<User> usersInChat;
 
+    public List<User> usersInThisStream = new ArrayList<>();
+
+    private boolean streamStarted = false;
+
     public SetWatchTime(TwitchConnection twitchConnection) {
         this.twitchConnection = twitchConnection;
     }
@@ -24,9 +29,15 @@ public class SetWatchTime extends Thread {
         while (true) {
             wait(MINUTES);
             if (twitchConnection.isLive()) {
+                if (!streamStarted) {
+                    log.info("Stream started");
+                    usersInThisStream = new ArrayList<>();
+                    streamStarted = true;
+                }
                 setWatchTime();
             } else {
                 log.info("Stream is offline");
+                streamStarted = false;
             }
         }
     }
@@ -51,6 +62,13 @@ public class SetWatchTime extends Thread {
             }
         }
         usersInChat = usersChat;
+
+        for (User user : usersChat) {
+            if (!usersInThisStream.contains(user)) {
+                usersInThisStream.add(user);
+            }
+        }
+
         log.info("Watch time updated");
     }
 

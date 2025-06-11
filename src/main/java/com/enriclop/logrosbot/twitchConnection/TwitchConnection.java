@@ -83,6 +83,8 @@ public class TwitchConnection {
 
     com.github.twitch4j.helix.domain.User channel;
 
+    SetWatchTime setWatchTime;
+
     @Autowired
     private AchievementGeneration achievementGeneration;
 
@@ -149,7 +151,8 @@ public class TwitchConnection {
 
          commands();
 
-         new SetWatchTime(this).start();
+         setWatchTime = new  SetWatchTime(this);
+         setWatchTime.start();
 
          sendMessage("Bot Online");
     }
