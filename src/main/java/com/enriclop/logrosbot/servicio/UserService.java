@@ -1,5 +1,6 @@
 package com.enriclop.logrosbot.servicio;
 
+import com.enriclop.logrosbot.dto.user.UserDto;
 import com.enriclop.logrosbot.modelo.Aura;
 import com.enriclop.logrosbot.modelo.User;
 import com.enriclop.logrosbot.repositorio.IUserRepository;
@@ -24,8 +25,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getUsers() {
+        return userRepository.getUsersLeaderboard();
     }
 
     public User getUserByUsername(String username) {

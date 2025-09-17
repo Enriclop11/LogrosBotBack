@@ -1,12 +1,15 @@
 package com.enriclop.logrosbot.security;
 
 import com.enriclop.logrosbot.dto.user.AdminUser;
+import com.enriclop.logrosbot.modelo.User;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 @Slf4j
 @Configuration
@@ -27,6 +30,9 @@ public class Settings {
     private String steamKey;
     private String steamId;
     private String xboxKey;
+
+    private List<String> moderators;
+    private List<User> moderatorUsers;
 
     @PostConstruct
     public void initAdminUser() {

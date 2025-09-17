@@ -1,9 +1,12 @@
 package com.enriclop.logrosbot.repositorio;
 
+import com.enriclop.logrosbot.dto.user.UserDto;
 import com.enriclop.logrosbot.modelo.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface IUserRepository extends JpaRepository<User, Integer> {
@@ -12,4 +15,9 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.twitchId like ?1")
     User findByTwitchIdLike(String twitchId);
+
+    @Query("select new com.enriclop.logrosbot.dto.user.UserDto(u.id as id, u.twitchId as twitchId, u.username as username, " +
+            "u.score as score, u.avatar as avatar, (select count(p) from Achievement p where p.user.id = u.id) as achievements) from User u"
+    )
+    List<UserDto> getUsersLeaderboard();
 }

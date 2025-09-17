@@ -6,6 +6,7 @@ import com.enriclop.logrosbot.dto.user.UserCardsDTO;
 import com.enriclop.logrosbot.dto.user.UserDto;
 import com.enriclop.logrosbot.dto.user.UserProfileDto;
 import com.enriclop.logrosbot.modelo.User;
+import com.enriclop.logrosbot.security.Settings;
 import com.enriclop.logrosbot.servicio.UserService;
 import com.enriclop.logrosbot.twitchConnection.TwitchConnection;
 import com.enriclop.logrosbot.utilities.Utilities;
@@ -41,10 +42,12 @@ public class UserController {
     @Autowired
     private TwitchConnection twitchConnection;
 
+    @Autowired
+    private Settings settings;
+
     @GetMapping("/users")
     public List<UserDto> getUsers() {
-        List<User> users = userService.getUsers();
-        return UserDto.fromUsers(users);
+        return userService.getUsers();
     }
 
     @GetMapping("/users/{id}")
@@ -85,7 +88,16 @@ public class UserController {
     @PostMapping("/myuser")
     public UserProfileDto getMyUser(@RequestHeader("Authorization") String token) {
         User user = userService.getUserByToken(token);
-        return UserProfileDto.fromUser(user);
+
+        log.info("Getting user profile for: " + user.getUsername());
+
+        boolean isModerator = settings.getModeratorUsers()
+                .stream()
+                .anyMatch(moderator -> moderator.getUsername().equals(user.getUsername()));
+
+        log.info("Is moderator: " + isModerator);
+
+        return UserProfileDto.fromUser(user, isModerator);
     }
 
     @PostMapping("/changePassword")
@@ -98,25 +110,6 @@ public class UserController {
     
     static class PasswordDTO {
         public String password;
-    }
-
-    @PostMapping("/selectCard")
-    public void selectCard(@RequestHeader("Authorization") String token, @RequestBody SelectCardDTO card) {
-        User user = userService.getUserByToken(token);
-        List<Integer> selectedCards = user.getSelectedCards();
-
-        if (selectedCards.contains(card.cardId)) {
-            selectedCards.remove(card.cardId);
-        } else {
-            selectedCards.add(card.cardId);
-        }
-
-        if (selectedCards.size() > 3) {
-            selectedCards.remove(0);
-        }
-
-        user.setSelectedCards(selectedCards);
-        userService.saveUser(user);
     }
 
     static class SelectCardDTO {
@@ -176,5 +169,19 @@ public class UserController {
     static class TwitchLoginDTO {
         public String code;
     }
+
+    /*
+    @PostMapping("/selectAchievement")
+    public void selectAchievement(@RequestHeader("Authorization") String token, @RequestBody SelectAchievement achievement) {
+        User user = userService.getUserByToken(token);
+        user.setSelectedAchievement(achievement.achievementId);
+        userService.saveUser(user);
+    }
+
+    static class SelectAchievement {
+        public Integer achievementId;
+    }
+
+     */
 
 }

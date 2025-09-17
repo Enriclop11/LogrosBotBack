@@ -26,6 +26,8 @@ public class UserCardsDTO {
 
     private List<Aura> auras;
 
+    //private AchievementDTO selectedAchievement;
+
     public UserCardsDTO(User user) {
         this.id = user.getId();
         this.twitchId = user.getTwitchId();
@@ -34,6 +36,16 @@ public class UserCardsDTO {
         this.avatar = user.getAvatar();
         this.achievements = AchievementDTO.fromPhotoCards(user.getAchievements());
         this.auras = user.getAuras();
+
+
+        /*
+        this.selectedAchievement = user.getSelectedAchievement() != null ?
+                this.achievements.stream()
+                        .filter(a -> a.getId() == user.getSelectedAchievement())
+                        .findFirst()
+                        .orElse(null) : null;
+
+         */
     }
 
     public static List<UserCardsDTO> fromUsers(List<User> users) {

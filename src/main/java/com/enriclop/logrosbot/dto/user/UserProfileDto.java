@@ -23,6 +23,8 @@ public class UserProfileDto {
 
     private int achievements;
 
+    private boolean isModerator;
+
     private List<Aura> auras;
 
     UserProfileDto(User user) {
@@ -35,8 +37,10 @@ public class UserProfileDto {
         this.auras = user.getAuras();
     }
 
-    public static UserProfileDto fromUser(User user) {
-        return new UserProfileDto(user);
+    public static UserProfileDto fromUser(User user, boolean isModerator) {
+        UserProfileDto dto = new UserProfileDto(user);
+        dto.setModerator(isModerator);
+        return dto;
     }
 
     public static List<UserProfileDto> fromUsers(List<User> users) {

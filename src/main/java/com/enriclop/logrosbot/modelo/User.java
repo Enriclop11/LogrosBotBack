@@ -34,6 +34,7 @@ public class User {
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OrderBy("id ASC")
     private List<Achievement> achievements = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
@@ -74,13 +75,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = Utilities.hashPassword(password);
-    }
-
-    public void setSelectedCards(List<Integer> cardIds) {
-        if (cardIds.size() <= 3) {
-            this.selectedCards = cardIds;
-        } else {
-            throw new IllegalArgumentException("You can only select up to 3 cards.");
-        }
     }
 }

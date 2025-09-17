@@ -1,7 +1,7 @@
 package com.enriclop.logrosbot.dto.user;
 
-import com.enriclop.logrosbot.modelo.Aura;
 import com.enriclop.logrosbot.modelo.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class UserDto {
 
     private int id;
@@ -23,8 +24,6 @@ public class UserDto {
 
     private int achievements;
 
-    private List<Aura> auras;
-
     UserDto(User user) {
         this.id = user.getId();
         this.twitchId = user.getTwitchId();
@@ -32,7 +31,15 @@ public class UserDto {
         this.score = user.getScore();
         this.avatar = user.getAvatar();
         this.achievements = user.getAchievements().size();
-        this.auras = user.getAuras();
+    }
+
+    public UserDto(Integer id, String twitchId, String username, Integer score, String avatar, Long achievements) {
+        this.id = id;
+        this.twitchId = twitchId;
+        this.username = username;
+        this.score = score;
+        this.avatar = avatar;
+        this.achievements = achievements.intValue();
     }
 
     public static UserDto fromUser(User user) {

@@ -5,11 +5,11 @@ import com.enriclop.logrosbot.twitchConnection.TwitchConnection;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Spawn extends Event {
+public class SpawnEvent extends Event {
 
     Achievement wildCard;
 
-    public Spawn() {
+    public SpawnEvent() {
         super(
                 "Spawn",
                 false,
