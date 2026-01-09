@@ -11,7 +11,7 @@ public class CatchReward extends Reward {
     public CatchReward() {
         super(
                 "Catch",
-                "catch",
+                "Capturar logro",
                 10,
                 true,
                 false,

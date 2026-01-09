@@ -464,7 +464,7 @@ public class TwitchConnection {
 
 
         //wildAchievement.getRarity() is a percentage (0-100) ex 67.1
-        int catchDifficulty = (int) (wildAchievement.getRarity() * 10);
+        int catchDifficulty = (int) (wildAchievement.getRarity() * 5);
 
         log.info(random  + " / " + catchDifficulty);
 

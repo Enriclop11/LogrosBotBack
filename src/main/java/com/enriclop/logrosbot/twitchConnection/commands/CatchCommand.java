@@ -13,7 +13,7 @@ public class CatchCommand extends Command {
         super(
                 "Catch",
                 "!catch",
-                "Atrapa una photocard",
+                "Atrapa un logro",
                 true,
                 true,
                 0,
